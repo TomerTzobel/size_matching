@@ -4,13 +4,18 @@ app = Flask(__name__)
 #DB on server, only for demonstration
 nikeToAdidas = [{'S':100,'M':50,'L':20},{'S':0,'M':800,'L':200},{'S':1,'M':5,'L':2}]
 
-#if the brand is 'S' and the Typs is 'Adidas' should return 64
+#if the brand is 'Adidas' and the Typs is 'shirt' should return 64
+#for exmaple our host alreay buy nike shirt with size 'S' (index 1 in the array)
+#among all the people that are size Small in Nike:
+# 800 of them are size M in adidas
+# 200 of them are size L in adids
+# therefor we shuld get the number for recommend 64 (when 60 is M and 80 is L)
 @app.route('localhost/<brand>/<productType>')
 def recommend(brand,productType):
     Brand = str(brand)
     Type = str(productType)
     countSize = [0 for i in range(5)]
-    if (Brand == "S" and Type == "Adidas"):
+    if (Brand == "shirt" and Type == "Adidas"):
         number = 0
         dict = nikeToAdidas[location(Brand)] #should be replace with DB lists
         for key, value in dict.items():
