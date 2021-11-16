@@ -10,14 +10,12 @@ nikeToAdidas = [{'S':100,'M':50,'L':20},{'S':0,'M':800,'L':200},{'S':1,'M':5,'L'
 # 800 of them are size M in adidas
 # 200 of them are size L in adids
 # therefor we shuld get the number for recommend 64 (when 60 is M and 80 is L)
-@app.route('localhost/<brand>/<productType>')
+@app.route("/recommend/<string:brand>/<string:productType>")
 def recommend(brand,productType):
-    Brand = str(brand)
-    Type = str(productType)
     countSize = [0 for i in range(5)]
-    if (Brand == "shirt" and Type == "Adidas"):
+    if (brand == "shirt" and productType == "adidas"):
         number = 0
-        dict = nikeToAdidas[location(Brand)] #should be replace with DB lists
+        dict = nikeToAdidas[1] #should be replace with DB lists
         for key, value in dict.items():
             countSize[location(key)] += value
         # algorithm
@@ -25,45 +23,46 @@ def recommend(brand,productType):
         for i in range(5):
             sizeNum = (i + 1) * 20
             number += sizeNum * (countSize[i] / totalCount)
-        return number #retun 64 if success
-    return 0 #return 0 if fail
+        return str(number) #retun 64 if success
+    return "0" #return 0 if fail
 
 
 def translateSize(size):
-    if (size == 'XS'):
+    if (size == "XS"):
         return 20
-    if (size == 'S'):
+    if (size == "S"):
         return 40
-    if (size == 'M'):
+    if (size == "M"):
         return 60
-    if (size == 'L'):
+    if (size == "L"):
         return 80
-    if (size == 'Xl'):
+    if (size == "Xl"):
         return 100
+    else:
+        return 0 #fail
 
 def location(size):
     return int((translateSize(size))/20)-1
 
-
-# Brand = str('M')
-# Type = str('Adidas')
-# countSize = [0 for i in range(5)]
-# if (Brand == 'M' and Type == 'Adidas'):
-#     number = 0
-#     dict = nikeToAdidas[1]
-#     for key,value in dict.items():
-#         countSize[location(key)] += value
-#     #algorithem
-#     totalCount = int(sum(countSize))
-#     for i in range(5):
-#         sizeNum = (i+1)*20
-#         number += sizeNum * ( countSize[i] / totalCount)
-#
-# print(number)
-
-# if __name__ =="__main__":
-#     app.run(debug = True)
+if __name__ =="__main__":
+    app.run(debug = True)
 
 # @app.route('/')
 # def index():
-#     print ("hello world")
+#     return "hello world"
+
+# brand = "shirt"
+# productType = "adidas"
+# countSize = [0 for i in range(5)]
+# if (brand == "shirt" and productType == "adidas"):
+#     number = 0
+#     dict = nikeToAdidas[1] #should be replace with DB lists
+#     for key, value in dict.items():
+#         countSize[location(key)] += value
+#     # algorithm
+#     totalCount = int(sum(countSize))
+#     for i in range(5):
+#         sizeNum = (i + 1) * 20
+#         print (sizeNum * (countSize[i] / totalCount))
+#         number += sizeNum * (countSize[i] / totalCount)
+#     print(number) #retun 64 if success
