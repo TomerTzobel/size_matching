@@ -39,7 +39,7 @@ def translateSize(size):
     if (size == "Xl"):
         return 100
     else:
-        return 0 #fail
+        return 0 #translate fail
 
 def location(size):
     return int((translateSize(size))/20)-1
