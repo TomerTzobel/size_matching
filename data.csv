@@ -1,5 +1,20 @@
 type,brand,imgURL,name
-shirt,nike,https://media.terminalx.com/pub/media/catalog/product/cache/f112238e8de94b6d480bd02e7a9501b8/z/1/z198690021-11636986346.jpg,Nike Football Dri-FIT
-shirt,nike,https://media.terminalx.com/pub/media/catalog/product/cache/f112238e8de94b6d480bd02e7a9501b8/z/1/z100990006-11626949688_1.jpg,Nike Blue t-shirt
-shirt,nike,https://media.terminalx.com/pub/media/catalog/product/cache/f112238e8de94b6d480bd02e7a9501b8/z/1/z102210006-11628521602_6.jpg,Nike Training Dri-FIT
-pants,adidas,https://media.terminalx.com/pub/media/catalog/product/cache/f112238e8de94b6d480bd02e7a9501b8/z/0/z005430001-21622480127.jpg,ADIDAS PRIDE
+Shirt,nike,https://media.terminalx.com/pub/media/catalog/product/cache/f112238e8de94b6d480bd02e7a9501b8/z/1/z198690021-11636986346.jpg,Nike Football Dri-FIT
+Shirt,nike,https://media.terminalx.com/pub/media/catalog/product/cache/f112238e8de94b6d480bd02e7a9501b8/z/1/z100990006-11626949688_1.jpg,Nike Blue t-shirt
+Shirt,nike,https://media.terminalx.com/pub/media/catalog/product/cache/f112238e8de94b6d480bd02e7a9501b8/z/1/z102210006-11628521602_6.jpg,Nike Training Dri-FIT
+Shirt,,,
+Shirt,,,
+Shirt,,,
+Shirt,,,
+Shirt,,,
+Shirt,,,
+Dress,MANGO,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z132110001-11630494465.jpg,maxi dress - satin
+Dress,MANGO,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z156960004-11631614073.jpg,Flower Printed Mini Dress
+Dress,MANGO,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z132360001-11636469842.jpg,Mumbling strap mini dress
+Dress,AMERICAN EAGLE,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/x/7/x742405020-11636876423.jpg,Lattice dress in braid texture
+Dress,AMERICAN EAGLE,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/0/z090225106-11627998636.jpg,Floral print mini dress paired with lace
+Dress,VERO MODA,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/2/z211816169-11635928310_1.jpg,Mini dress combined with lidding laces
+Dress,VERO MODA,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/2/z211880008-11635942874.jpg,Velvet dress paired with hoodie
+Dress,QUESTION MARK,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/0/z079300001-11632296202.jpg,Mini Cut Out dress
+Dress,YANGA,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z133690020-11634033667.jpg,Zebra-printed felica dress
+Dress,YANGA,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/x/8/x865030001-11613392213.jpg,Knitted hoodie dress
