@@ -1,4 +1,6 @@
 from flask import Flask
+import pandas as pd
+import numpy as np
 app = Flask(__name__)
 
 #DB on server, only for demonstration
@@ -13,7 +15,7 @@ nikeToAdidas = [{'S':100,'M':50,'L':20},{'S':0,'M':800,'L':200},{'S':1,'M':5,'L'
 @app.route("/recommend/<string:brand>/<string:productType>")
 def recommend(brand,productType):
     countSize = [0 for i in range(5)]
-    if (brand == "shirt" and productType == "adidas"):
+    if (productType == "shirt" and brand == "adidas"):
         number = 0
         dict = nikeToAdidas[1] #should be replace with DB lists
         for key, value in dict.items():
@@ -26,6 +28,17 @@ def recommend(brand,productType):
         return str(number) #retun 64 if success
     return "0" #return 0 if fail
 
+#in order to test use brand- nike and type-shirt
+@app.route("/get/<string:brand>/<string:productType>")
+def get(brand,productType):
+    file = open("data.csv", "r")
+    df = pd.read_csv(file)
+    df = df[df.type == productType]
+    df = df[df.brand == brand]
+    df = df.drop(["type", "brand"], axis=1)
+    d = df.transpose().to_dict(orient='dict')
+    file.close()
+    return d
 
 def translateSize(size):
     if (size == "XS"):
@@ -44,8 +57,22 @@ def translateSize(size):
 def location(size):
     return int((translateSize(size))/20)-1
 
+#to start the server
 if __name__ =="__main__":
     app.run(debug = True)
+
+
+# file = open("data.csv", "r")
+# df = pd.read_csv(file)
+# file.close()
+# df = df[df.type == "shirt"]
+# df = df[df.brand == "nike"]
+# df = df.drop(["type", "brand"], axis=1)
+# print(df)
+# d = df.to_dict(orient='records')
+# print(d)
+
+
 
 # @app.route('/')
 # def index():
