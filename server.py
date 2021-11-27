@@ -33,9 +33,9 @@ def recommend(brand,productType):
 def get(brand,productType):
     file = open("data.csv", "r")
     df = pd.read_csv(file)
-    df = df[df.type == productType]
-    df = df[df.brand == brand]
-    df = df.drop(["type", "brand"], axis=1)
+    df = df[df.Type == productType]
+    df = df[df.Brand == brand]
+    df = df.drop(["Type", "Brand"], axis=1)
     d = df.transpose().to_dict(orient='dict')
     file.close()
     return d
