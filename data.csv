@@ -1,13 +1,14 @@
-type,brand,imgURL,name
-Shirt,nike,https://media.terminalx.com/pub/media/catalog/product/cache/f112238e8de94b6d480bd02e7a9501b8/z/1/z198690021-11636986346.jpg,Nike Football Dri-FIT
-Shirt,nike,https://media.terminalx.com/pub/media/catalog/product/cache/f112238e8de94b6d480bd02e7a9501b8/z/1/z100990006-11626949688_1.jpg,Nike Blue t-shirt
-Shirt,nike,https://media.terminalx.com/pub/media/catalog/product/cache/f112238e8de94b6d480bd02e7a9501b8/z/1/z102210006-11628521602_6.jpg,Nike Training Dri-FIT
-Shirt,,,
-Shirt,,,
-Shirt,,,
-Shirt,,,
-Shirt,,,
-Shirt,,,
+Type,Brand,imgURL,Name
+Shirt,Nike,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z182670011-11631454318.jpg,Training shirt with logo
+Shirt,Nike,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z185710001-11634554529_1.jpg,T-shirt Krupp with logo
+Shirt,MANGO,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z155810001-11633431394.jpg,Striped T-shirt
+Shirt,MANGO,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z155880001-11637755285.jpg,T-shirt Krupp Reeve
+Shirt,MANGO,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z128250002-1_1.png,Turtleneck T-shirt
+Shirt,AMERICAN EAGLE,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/x/7/x747855109-11636590696.jpg,T-shirt in print
+Shirt,AMERICAN EAGLE,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/x/7/x742165211-11636368005.jpg,Smooth pefloum shirt
+Shirt,GAP,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/0/z062306152-11636710084.jpg,T-shirt with logo
+Shirt,REEBOK,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z111880001-11629297545.jpg,Krupp-cut T-shirt
+Shirt,REEBOK,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z113520027-11629708636.jpg,T-shirt with logo print
 Dress,MANGO,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z132110001-11630494465.jpg,maxi dress - satin
 Dress,MANGO,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z156960004-11631614073.jpg,Flower Printed Mini Dress
 Dress,MANGO,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z132360001-11636469842.jpg,Mumbling strap mini dress
@@ -18,3 +19,13 @@ Dress,VERO MODA,https://media.terminalx.com/pub/media/catalog/product/cache/92af
 Dress,QUESTION MARK,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/0/z079300001-11632296202.jpg,Mini Cut Out dress
 Dress,YANGA,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z133690020-11634033667.jpg,Zebra-printed felica dress
 Dress,YANGA,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/x/8/x865030001-11613392213.jpg,Knitted hoodie dress
+Jacket,REEBOK,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z111910001-11629297558.jpg,Jacket with a high collar
+Jacket,REEBOK,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z103900007-11625738291.jpg,Jacket with logo print
+Jacket,ADIDAS,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z176050006-11635149752_1.jpg,Denim jacket with logo
+Jacket,ADIDAS,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z118430017-11635243126.jpg,Jacket paired with logo
+Jacket,ADIDAS,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/x/6/x634250001-11602517766.jpg,Nylon jacket with a high collar and logo
+Jacket,TOMMY HILFIGER,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z166966450-11633270304_5.jpg,Krupp denim jacket
+Jacket,MANGO,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z159390001-11633937420.jpg,Leather like biker jacket
+Jacket,MANGO,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z160160002-11636722626.jpg,Oversized printed jacket
+Jacket,PUMA,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z110015264-11632997899.jpg,Workout jacket with hoodie hat
+Jacket,PUMA,https://media.terminalx.com/pub/media/catalog/product/cache/92af6b9c945798a7e3b64d91033084b3/z/1/z110295264-11637494218.jpg,Krupp infuse track jacket
