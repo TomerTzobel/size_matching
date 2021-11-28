@@ -10,7 +10,10 @@ import { fetchData } from '../utils/fetchData';
 const SearchBar = (props) => {
   const { searchText } = props;
   const dispatch = useDispatch();
-  dispatch({type: "SET_EMPTY_SEARCH"});
+  
+  if (!searchText){
+    dispatch({type: "SET_EMPTY_SEARCH"});
+  }
   
   const textChangeHandler = (value) =>
     dispatch({ type: "SET_SEARCH", payload: { text: value } });
@@ -24,9 +27,11 @@ const SearchBar = (props) => {
       const input_1 = words[0].toLowerCase();
       const input_2 = words[1].toLowerCase();
       if (brandList.includes(input_1) && productList.includes(input_2)){
-        getCards(input_1, input_2);        
+        getCards(input_1, input_2);
+        dispatch({ type: "SET_SEARCH_SUCCESS" });        
       } else if (brandList.includes(input_2) && productList.includes(input_1)){
         getCards(input_2, input_1);
+        dispatch({ type: "SET_SEARCH_SUCCESS" });
       } else {
         notFound('no matching brand/product');
         return;

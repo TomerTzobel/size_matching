@@ -2,12 +2,15 @@ import axios from "axios";
 import { selectUsername, selectUserSizes } from "../selectors";
 
 export const postSizesOnRegister = () => {
-  selectUserSizes().array.forEach(({ product, brand, size }) => {
+  const sizes = selectUserSizes();
+  console.log(sizes);
+  debugger;
+  sizes.forEach(({ product, brand, size }) => {
     postSize(product, brand, size);
   });
 };
 
-export const postSize = (product, brand, size, username) => {
+export const postSize = (product, brand, size) => {
   const username = selectUsername();
   const record = {
     username,
