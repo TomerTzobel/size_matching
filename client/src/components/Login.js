@@ -2,6 +2,8 @@ import React from "react";
 import { authenticate } from "../utils/auth";
 import { Form, Button, Container, Card, Row, Col } from "react-bootstrap";
 import { useState } from "react";
+import RegisterModal from "./RegisterModal";
+import { useDispatch } from "react-redux";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
@@ -14,6 +16,9 @@ export const Login = () => {
       setErr("Something went wrong, please try again");
     }
   };
+
+  const dispatch = useDispatch();
+  const isEmptyFields = ! (username && password);
 
   return (
     <>
@@ -44,12 +49,12 @@ export const Login = () => {
                 </Form.Group>
                 <Row>
                   <Col>
-                    <Button variant="primary" onClick={onLogin}>
+                    <Button variant={isEmptyFields? "secondary":"primary"} onClick={onLogin}>
                       Login
                     </Button>
                   </Col>
                   <Col>
-                    <Button variant="info">Register</Button>
+                    <Button variant={isEmptyFields? "secondary":"info"} onClick={()=>dispatch({type: "SHOW_REGISTER"})}>Register</Button>
                   </Col>
                 </Row>
               </Form>
@@ -57,6 +62,7 @@ export const Login = () => {
           </Card>
         </Container>
       </Container>
+      <RegisterModal newUsername={username} />
     </>
   );
 };

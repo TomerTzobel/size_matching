@@ -47,7 +47,7 @@ const SearchBar = (props) => {
         <Col>
           <Form.Control
             type="text"
-            placeholder="Normal text"
+            placeholder="Search for a category and a brand, e.g - Dress Mango"
             value={searchText}
             onChange={(e) => textChangeHandler(e.target.value)}
           />

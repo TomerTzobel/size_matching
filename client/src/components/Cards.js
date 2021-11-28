@@ -10,10 +10,10 @@ const Cards = (props) => {
   const dispatch = useDispatch();
   const buyHandler = () => dispatch({type: "SHOW"});
 
-  if (!search){
+  if (!search){ //todo - fix bug when user starts searching "no results appear"
     return (
       <div className='m-5 p-5'>
-        <h1 className='m-5 p-5'>Please search for items</h1>
+        <h1 className='m-5 p-5'>Search your desired products and start shopping</h1>
       </div>
     )
 
@@ -21,7 +21,7 @@ const Cards = (props) => {
   if (!items.length) {
     return (
       <div className='m-5 p-5'>
-        <h1 className='m-5 p-5'>Couln't find matching items...</h1>
+        <h1 className='m-5 p-5'>No results... please try a different search </h1>
       </div>
     )
   }

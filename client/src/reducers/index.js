@@ -7,6 +7,7 @@ import product from './product'
 import recommendedSize from './recommendedSize'
 import searchText from './searchText'
 import user from './user'
+import showRegisterModal from './showRegisterModal'
 
 export default combineReducers({
   showModal,
@@ -17,4 +18,5 @@ export default combineReducers({
   recommendedSize,
   searchText,
   user,
+  showRegisterModal,
 })
