@@ -4,6 +4,7 @@ import { Form, Button, Container, Card, Row, Col } from "react-bootstrap";
 import { useState } from "react";
 import RegisterModal from "./RegisterModal";
 import { useDispatch } from "react-redux";
+import { registerNewUser } from '../utils/register'
 
 export const Login = () => {
   const [username, setUsername] = useState("");
@@ -20,6 +21,10 @@ export const Login = () => {
   const dispatch = useDispatch();
   const isEmptyFields = ! (username && password);
 
+  const onRegisterClick = () => {
+    registerNewUser(username, password);
+    dispatch({type: "SHOW_REGISTER"});
+  }
   return (
     <>
       <Container className="w-50 mt-5 mb-5 p-5">
@@ -54,7 +59,7 @@ export const Login = () => {
                     </Button>
                   </Col>
                   <Col>
-                    <Button variant="info" disabled={isEmptyFields} onClick={()=>dispatch({type: "SHOW_REGISTER"})}>Register</Button>
+                    <Button variant="info" disabled={isEmptyFields} onClick={onRegisterClick}>Register</Button>
                   </Col>
                 </Row>
               </Form>
