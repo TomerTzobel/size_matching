@@ -2,6 +2,9 @@ from flask import Flask
 import pandas as pd
 import numpy as np
 app = Flask(__name__)
+from flask_cors import CORS, cross_origin
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 #DB on server, only for demonstration
 nikeToAdidas = [{'S':100,'M':50,'L':20},{'S':0,'M':800,'L':200},{'S':1,'M':5,'L':2}]
@@ -13,6 +16,7 @@ nikeToAdidas = [{'S':100,'M':50,'L':20},{'S':0,'M':800,'L':200},{'S':1,'M':5,'L'
 # 200 of them are size L in adids
 # therefor we shuld get the number for recommend 64 (when 60 is M and 80 is L)
 @app.route("/recommend/<string:brand>/<string:productType>")
+@cross_origin()
 def recommend(brand,productType):
     countSize = [0 for i in range(5)]
     if (productType == "shirt" and brand == "adidas"):
@@ -30,6 +34,7 @@ def recommend(brand,productType):
 
 #in order to test use brand- nike and type-shirt
 @app.route("/get/<string:brand>/<string:productType>")
+@cross_origin()
 def get(brand,productType):
     file = open("data.csv", "r")
     df = pd.read_csv(file)
