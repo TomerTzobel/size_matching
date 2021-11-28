@@ -4,11 +4,11 @@ import { Footer } from './components/Footer';
 // import Footer from './components/Footer2'
 import Cards from './components/Cards';
 import logo from './logo.png';
-import Filters from './components/Filters';
 import RecommendedSize from './components/RecommendedSize';
 import MySizes from './components/MySizes';
 import { itemsList } from './data/items';
 import { useDispatch } from 'react-redux';
+import SearchBar from './components/SearchBar';
 
 function App() {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
       </header>
-      <Filters />
+      <SearchBar />
       <RecommendedSize />
       <Cards />
       <MySizes />

@@ -8,19 +8,19 @@ const RecommendedSize = (props) => {
     <div>
       <Container
         fluid
-        className="w-50 p-2 mt-3 mb-2 border border-secondary rounded bg-light"
+        className="w-50 p-2 mt-3 mb-3 border border-secondary rounded bg-light"
       >
-        <h2> We think the best size for you is: </h2>
-        <Row>
+        <h3> Based on your shopping history, we think the best fit for you is: </h3>
+        <Row className='mt-3'>
           <Col> XS </Col>
           <Col> S </Col>
           <Col> M </Col>
           <Col> L </Col>
           <Col> XL </Col>
         </Row>
-        <Row>
+        <Row className='mb-3'>
           <Col>
-            <ProgressBar now={recommendedSize} />
+            <ProgressBar now={recommendedSize}/>
           </Col>
         </Row>
       </Container>

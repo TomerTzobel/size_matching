@@ -1,26 +1,26 @@
 import axios from "axios";
-import { selectUserSizes } from "../selectors";
 import { store } from '../store';
-import { itemsList } from "../data/items";
 
 export const fetchData = async (product, brand) => {
     try {
-        const { data } = await axios.get(`http://localhost:5000/cards/${product}/${brand}`);
-        store.dispatch({type: "SET_ITEMS", payload: data})
+        const { data } = await axios.get(`http://localhost:5000/get/${brand}/${product}`);
+        const items = Object.values(data).map(item => ({
+            brand: brand,
+            imgUrl: item.imgURL,
+            name: item.Name
+        }));
+        store.dispatch({type: "SET_ITEMS", payload: items});
     } catch {
-        store.dispatch({type: "SET_ITEMS", payload: itemsList} )
+        store.dispatch({type: "SET_ITEMS", payload: []} )
     }
     try {
-
-        const response = await axios.get("http://localhost:5000", {
-            params: {
-                brand,
-                product,
-                userSizes: selectUserSizes()
-            }
-        });
-        store.dispatch({type: "SET_RECOMMENDATION", payload: response.data})
+        let { data } = await axios.get(`http://localhost:5000/recommend/${brand}/${product}`);
+        console.log(data);
+        if (data === 0){ // todo - remove when server returns a num
+            data = Math.floor(Math.random() * 100);
+        }
+        store.dispatch({type: "SET_RECOMMENDATION", payload: data})
     } catch {
-        store.dispatch({type: "SET_RECOMMENDATION", payload: 60})
+        store.dispatch({type: "SET_RECOMMENDATION", payload: 55})
     }
 }

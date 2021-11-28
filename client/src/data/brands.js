@@ -1,12 +1,13 @@
 
 export const brandList = [
-    'Nike',
-    'Adidas',
-    'Louis Vuitton',
-    'Gucci',
-    'Zara',
-    'H&M',
-    'Uniqlo',
-    'Levi\'s',
-    'The North Face'
+    'nike',
+    'mango',
+    'reebok',
+    'gap',
+    'adidas',
+    'american-eagle',
+    'vero-moda',
+    'yanga',
+    'puma',
+    'tommy-hilgifer'
 ]
