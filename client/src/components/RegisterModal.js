@@ -73,7 +73,8 @@ const RegisterModal = (props) => {
                 {sizeButtons}
               </ButtonGroup>
               <Button
-                variant={readyToAdd ? "info" : "secondary"}
+                variant="info"
+                disabled={!readyToAdd}
                 className="m-2 w-25"
                 onClick={addSize}
               >

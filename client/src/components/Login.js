@@ -49,12 +49,12 @@ export const Login = () => {
                 </Form.Group>
                 <Row>
                   <Col>
-                    <Button variant={isEmptyFields? "secondary":"primary"} onClick={onLogin}>
+                    <Button variant="primary" disabled={isEmptyFields} onClick={onLogin}>
                       Login
                     </Button>
                   </Col>
                   <Col>
-                    <Button variant={isEmptyFields? "secondary":"info"} onClick={()=>dispatch({type: "SHOW_REGISTER"})}>Register</Button>
+                    <Button variant="info" disabled={isEmptyFields} onClick={()=>dispatch({type: "SHOW_REGISTER"})}>Register</Button>
                   </Col>
                 </Row>
               </Form>

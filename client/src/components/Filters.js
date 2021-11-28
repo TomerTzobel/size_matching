@@ -21,7 +21,7 @@ const Filters = (props) => {
               />
             </Col>
             <Col>
-              <Dropdown
+              <Dropdown //todo - make sure long brands doesn't break
                 filter="BRAND"
                 options={brandList}
                 triggerText={activeBrand || "Brand"}

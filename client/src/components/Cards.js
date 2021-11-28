@@ -12,9 +12,7 @@ const Cards = (props) => {
 
   if (!search){ //todo - fix bug when user starts searching "no results appear"
     return (
-      <div className='m-5 p-5'>
-        <h1 className='m-5 p-5'>Search your desired products and start shopping</h1>
-      </div>
+      <div></div>
     )
 
   }
