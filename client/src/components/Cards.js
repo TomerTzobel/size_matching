@@ -3,12 +3,21 @@ import BuyModal from "./BuyModal";
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
+import RecommendedSize from './RecommendedSize';
 
 const Cards = (props) => {
-  const { items } = props;
+  const { items, search } = props;
   const dispatch = useDispatch();
   const buyHandler = () => dispatch({type: "SHOW"});
 
+  if (!search){
+    return (
+      <div className='m-5 p-5'>
+        <h1 className='m-5 p-5'>Please search for items</h1>
+      </div>
+    )
+
+  }
   if (!items.length) {
     return (
       <div className='m-5 p-5'>
@@ -30,16 +39,20 @@ const Cards = (props) => {
   ))
 
   return (
+    <>
+    <RecommendedSize />
     <div className="row row-cols-1 row-cols-md-3 g-4">
       {cards}
       <BuyModal />
     </div>
+    </>
   );
 };
 
 function mapStateToProps(state) {
   return {
     items: state.items,
+    search: state.searchText
   };
 }
 

@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import { connect, useDispatch } from "react-redux";
 import { brandList } from "../data/brands";
 import { productList } from '../data/products'
-import { fetchData } from '../data/fetchData';
+import { fetchData } from '../utils/fetchData';
 
 const SearchBar = (props) => {
   const { searchText } = props;
@@ -13,7 +13,6 @@ const SearchBar = (props) => {
   const textChangeHandler = (value) =>
     dispatch({ type: "SET_SEARCH", payload: { text: value } });
   const onSearch = (searchKey) => {
-      console.log("fetching ...");
       const words = searchKey.split(' ');
       if (words.length !== 2) {
           notFound('length != 2');

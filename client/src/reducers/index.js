@@ -6,6 +6,7 @@ import brand from './brand'
 import product from './product'
 import recommendedSize from './recommendedSize'
 import searchText from './searchText'
+import user from './user'
 
 export default combineReducers({
   showModal,
@@ -15,4 +16,5 @@ export default combineReducers({
   product,
   recommendedSize,
   searchText,
+  user,
 })

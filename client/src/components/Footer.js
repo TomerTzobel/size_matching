@@ -7,7 +7,7 @@ export const Footer = () => {
         <div className="row">
             <div className="col-md-6 mt-md-0 mt-3">
             <h5 className="text-uppercase"> find your perfect size </h5>
-            <p className> Using modern machine-learning algorithms, <br></br> 
+            <p> Using modern machine-learning algorithms, <br></br> 
             We provide personalized size recommendations </p> 
             <p className="text-secondary"> Your private information is not shared </p>
                 </div>
