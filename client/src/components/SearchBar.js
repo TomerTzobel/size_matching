@@ -10,8 +10,11 @@ import { fetchData } from '../utils/fetchData';
 const SearchBar = (props) => {
   const { searchText } = props;
   const dispatch = useDispatch();
+  dispatch({type: "SET_EMPTY_SEARCH"});
+  
   const textChangeHandler = (value) =>
     dispatch({ type: "SET_SEARCH", payload: { text: value } });
+
   const onSearch = (searchKey) => {
       const words = searchKey.split(' ');
       if (words.length !== 2) {
@@ -31,7 +34,7 @@ const SearchBar = (props) => {
   }
 
   const notFound = (err) => {
-      dispatch({ type: "ITEMS_NOT_FOUND" });
+      dispatch({ type: "SET_NOT_FOUND" });
       console.log(err);
   }
 

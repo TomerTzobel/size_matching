@@ -4,32 +4,24 @@ import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import RecommendedSize from './RecommendedSize';
+import NoResults from "./NoResults";
 
 const Cards = (props) => {
-  const { items, search } = props;
+  const { items, noResultsMessage } = props;
   const dispatch = useDispatch();
   const buyHandler = () => dispatch({type: "SHOW"});
-
-  if (!search){ //todo - fix bug when user starts searching "no results appear"
-    return (
-      <div></div>
-    )
-
+  
+  if (noResultsMessage){
+    return <NoResults />
   }
-  if (!items.length) {
-    return (
-      <div className='m-5 p-5'>
-        <h1 className='m-5 p-5'>No results... please try a different search </h1>
-      </div>
-    )
-  }
+
   const cards = items.map((item) => (
     <div key={item.name} className="col">
       <div className="card">
         <img src={item.imgUrl} className="card-img-top" alt={item.name} />
         <div className="card-body">
           <h5 className="card-title">{item.name}</h5>
-          <p className="card-text">bla bla bla</p>
+          <p className="card-text">bla bla bla, best item ever!</p>
           <Button onClick={buyHandler} >Buy</Button>
         </div>
       </div>
@@ -50,7 +42,7 @@ const Cards = (props) => {
 function mapStateToProps(state) {
   return {
     items: state.items,
-    search: state.searchText
+    noResultsMessage: state.noResultsMessage
   };
 }
 

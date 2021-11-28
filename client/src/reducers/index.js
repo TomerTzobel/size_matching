@@ -8,6 +8,7 @@ import recommendedSize from './recommendedSize'
 import searchText from './searchText'
 import user from './user'
 import showRegisterModal from './showRegisterModal'
+import noResultsMessage from './noResultsMessage'
 
 export default combineReducers({
   showModal,
@@ -19,4 +20,5 @@ export default combineReducers({
   searchText,
   user,
   showRegisterModal,
+  noResultsMessage,
 })
