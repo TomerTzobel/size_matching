@@ -1,4 +1,6 @@
-from flask import Flask
+import json
+
+from flask import Flask,request
 import pandas as pd
 import numpy as np
 app = Flask(__name__)
@@ -6,8 +8,9 @@ from flask_cors import CORS, cross_origin
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-#DB on server, only for demonstration
+#DB on server, only for demonstratcdion
 nikeToAdidas = [{'S':100,'M':50,'L':20},{'S':0,'M':800,'L':200},{'S':1,'M':5,'L':2}]
+passwordsDict = dict()
 
 #if the brand is 'Adidas' and the Typs is 'shirt' should return 64
 #for exmaple our host alreay buy nike shirt with size 'S' (index 1 in the array)
@@ -44,6 +47,30 @@ def get(brand,productType):
     d = df.transpose().to_dict(orient='dict')
     file.close()
     return d
+
+@app.route("/login/", methods=["POST","GET"])
+@cross_origin()
+def login():
+    if request.method == "POST":
+        content = request.get_json(force=True)
+        dic = json.loads(content)
+        username = dic["username"]
+        password = dic["password"]
+        #username = request.form.get("username")
+        #password = request.form.get("password")
+        passwordsDict.update({username:password})
+    if request.method == "GET":
+        contant = request.get_json(force=True)
+        dic = json.loads(contant)
+        if (username not in passwordsDict):
+            return "0"
+        username = dic.get("username")
+        password = dic.get("password")
+        x = passwordsDict.get(username)
+        if (x == password):
+            return "1" #success
+        else:
+            return "0" #fail
 
 def translateSize(size):
     if (size == "XS"):
