@@ -52,16 +52,16 @@ def get(brand,productType):
 @cross_origin()
 def login():
     if request.method == "POST":
-        content = request.get_json(force=True)
-        dic = json.loads(content)
+        dic = request.get_json(force=True)
+        #dic = json.loads(dic)
         username = dic["username"]
         password = dic["password"]
         #username = request.form.get("username")
         #password = request.form.get("password")
         passwordsDict.update({username:password})
     if request.method == "GET":
-        contant = request.get_json(force=True)
-        dic = json.loads(contant)
+        dic = request.get_json(force=True)
+        #dic = json.loads(dic)
         if (username not in passwordsDict):
             return "0"
         username = dic.get("username")
