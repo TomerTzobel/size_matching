@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 app = Flask(__name__)
 from flask_cors import CORS, cross_origin
-cors = CORS(app)
+cors = CORS(app, resources={r"/foo": {"origins": "http://localhost:port"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 #DB on server, only for demonstratcdion
@@ -48,7 +48,7 @@ def get(brand,productType):
     file.close()
     return d
 
-@app.route("/login/", methods=["POST","GET"])
+@app.route("/login", methods=["POST","GET"])
 @cross_origin()
 def login():
     if request.method == "POST":
@@ -59,11 +59,12 @@ def login():
         #username = request.form.get("username")
         #password = request.form.get("password")
         passwordsDict.update({username:password})
+        print(f"registered new user: {username}, updates users dict: ")
+        print(passwordsDict)
+        return "1"
     if request.method == "GET":
-        dic = request.get_json(force=True)
+        dic = request.args.to_dict()
         #dic = json.loads(dic)
-        if (username not in passwordsDict):
-            return "0"
         username = dic.get("username")
         password = dic.get("password")
         x = passwordsDict.get(username)

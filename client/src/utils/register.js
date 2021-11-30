@@ -5,5 +5,5 @@ export const registerNewUser = (username, password) => {
     username,
     password,
   };
-  axios.post("http://localhost:5000/register", record);
+  axios.post("http://localhost:5000/login", record);
 };
