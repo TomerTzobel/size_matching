@@ -48,6 +48,20 @@ def get(brand,productType):
     file.close()
     return d
 
+@app.route("/getbyword/<string:word>")
+@cross_origin()
+def getbyword(word):
+    file = open("data.csv", "r")
+    df = pd.read_csv(file)
+    if word in {"shirt","dress","jacket"}:
+        df = df[df.Type == word]
+    else:
+        df = df[df.Brand == word]
+    df = df.drop(["Type", "Brand"], axis=1)
+    d = df.transpose().to_dict(orient='dict')
+    file.close()
+    return d
+
 @app.route("/login", methods=["POST","GET"])
 @cross_origin()
 def login():
