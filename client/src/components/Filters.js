@@ -3,7 +3,7 @@ import { Dropdown } from "./Dropdown";
 import { brandList } from "../data/brands";
 import { productList } from "../data/products";
 import { connect } from "react-redux";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 const Filters = (props) => {
   const { activeBrand, activeProduct } = props;
