@@ -1,4 +1,5 @@
 import json
+import mysql.connector
 
 from flask import Flask,request
 import pandas as pd
@@ -7,6 +8,24 @@ app = Flask(__name__)
 from flask_cors import CORS, cross_origin
 cors = CORS(app, resources={r"/foo": {"origins": "http://localhost:port"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
+
+# instructions: change the password to the password that you chose for you own SQL
+# then run only part 2 to create the DB
+# once you did it, set back part 2 to comment and then run only part 1
+db = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    passwd="aaat", #our last name first char's, change it if you need
+    # passwd ="abc70807", # for tomer, need to stay in comment
+    # database="testforme" #part 1 - run after part 2
+    )
+
+mycursor = db.cursor() # making
+# part 2 - run first and then set back to comment
+# mycursor.execute("CREATE DATABASE testforme") #run only one time
+# mycursor.execute("CREATE TABLE users (name VARCHAR(50), password VARCHAR(50),"
+#                 "personID int PRIMARY KEY AUTO_INCREMENT)") #run only one time
+
 
 #DB on server, only for demonstratcdion
 nikeToAdidas = [{'S':100,'M':50,'L':20},{'S':0,'M':800,'L':200},{'S':1,'M':5,'L':2}]
@@ -67,25 +86,58 @@ def getbyword(word):
 def login():
     if request.method == "POST":
         dic = request.get_json(force=True)
-        #dic = json.loads(dic)
         username = dic["username"]
         password = dic["password"]
-        #username = request.form.get("username")
-        #password = request.form.get("password")
-        passwordsDict.update({username:password})
+        username = repr(str(username))
+        password= repr(str(password))
+        mycursor.execute("SELECT COUNT(*) FROM users WHERE name = %s" % (username))
+        if(mycursor.fetchone()[0] > 0): #if the user alreay exist, just change password
+            mycursor.execute("UPDATE users SET password = %s WHERE name = %s" % (password,username))
+        else:
+            mycursor.execute("INSERT INTO users (name, password) VALUES(%s, %s)", (username, password))
         print(f"registered new user: {username}, updates users dict: ")
-        print(passwordsDict)
+        db.commit() #commit changes to our DB
         return "1"
     if request.method == "GET":
         dic = request.args.to_dict()
-        #dic = json.loads(dic)
-        username = dic.get("username")
-        password = dic.get("password")
-        x = passwordsDict.get(username)
+        username = dic["username"]
+        password = dic["password"]
+        username = repr(str(username))
+        password= repr(str(password))
+        mycursor.execute("SELECT password FROM users WHERE name = %s" % (username))
+        x = mycursor[0][0] #or just mycursor[0]
         if (x == password):
             return "1" #success
         else:
             return "0" #fail
+
+
+
+# @app.route("/login", methods=["POST","GET"])
+# @cross_origin()
+# def login():
+#     if request.method == "POST":
+#         dic = request.get_json(force=True)
+#         #dic = json.loads(dic)
+#         username = dic["username"]
+#         password = dic["password"]
+#         #username = request.form.get("username")
+#         #password = request.form.get("password")
+#         passwordsDict.update({username:password})
+#         print(f"registered new user: {username}, updates users dict: ")
+#         print(passwordsDict)
+#         return "1"
+#     if request.method == "GET":
+#         dic = request.args.to_dict()
+#         #dic = json.loads(dic)
+#         username = dic.get("username")
+#         password = dic.get("password")
+#         x = passwordsDict.get(username)
+#         if (x == password):
+#             return "1" #success
+#         else:
+#             return "0" #fail
+#
 
 def translateSize(size):
     if (size == "XS"):
