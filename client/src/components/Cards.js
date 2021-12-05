@@ -29,7 +29,7 @@ const Cards = (props) => {
         <div className="card-body">
           <h5 className="card-title">{item.name}</h5>
           <p className="card-text">{capitalize(item.brand)}</p>
-          <Button onClick={() => buyHandler(item)} >Buy</Button>
+          <Button variant="secondary" onClick={() => buyHandler(item)} >Buy</Button>
         </div>
       </div>
     </div>
