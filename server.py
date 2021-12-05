@@ -62,21 +62,19 @@ def get(brand,productType):
     df = pd.read_csv(file)
     df = df[df.Type == productType]
     df = df[df.Brand == brand]
-    df = df.drop(["Type", "Brand"], axis=1)
     d = df.transpose().to_dict(orient='dict')
     file.close()
     return d
 
-@app.route("/getbyword/<string:word>")
+@app.route("/get/<string:productType>")
 @cross_origin()
-def getbyword(word):
+def getbyword(productType):
     file = open("data.csv", "r")
     df = pd.read_csv(file)
-    if word in {"shirt","dress","jacket"}:
-        df = df[df.Type == word]
+    if productType in {"shirt","dress","jacket"}:
+        df = df[df.Type == productType]
     else:
-        df = df[df.Brand == word]
-    df = df.drop(["Type", "Brand"], axis=1)
+        df = df[df.Brand == productType]
     d = df.transpose().to_dict(orient='dict')
     file.close()
     return d

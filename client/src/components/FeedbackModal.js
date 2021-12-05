@@ -2,23 +2,21 @@ import { React , useState} from 'react'
 import { connect, useDispatch } from 'react-redux';
 import { Button, ButtonGroup, Container, Modal, Row } from 'react-bootstrap';
 import { sizes } from '../data/sizes'
-import { selectBrand, selectProduct } from '../selectors';
 import { postSize } from '../utils/postSize';
-import RecommendedSize from './RecommendedSize'
 
-const BuyModal = (props) => {
-    const { showModal, activeItem } = props;
+const FeedbackModal = (props) => {
+    const { showModal, item } = props;
     const [selectedSize, setSelectedSize] = useState("s");
+    const { brand, name, product } = item;
+
     const dispatch = useDispatch();
     const sizeButtons = sizes.map( size => (
         <Button key={size} onClick={()=>setSelectedSize(size)}>{size}</Button>
     ))
     
     const handleClose = () => dispatch({type: "HIDE_MODAL"});
-    const onOrder = () => {
-        const product = selectProduct();
-        const brand = selectBrand();
-        dispatch({ // todo - check server updates
+    const onSave = () => {        
+        dispatch({
             type: "ADD_SIZE", 
             payload: {
                 product,
@@ -28,22 +26,17 @@ const BuyModal = (props) => {
         });
         postSize(product, brand, selectedSize);
         handleClose();
-        setTimeout(() => {
-          dispatch({
-            type: "FEEDBACK_MODAL", 
-          })
-        }, 5000);
     };
 
     return (
         <>
         <Modal show={showModal} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Purchase {activeItem.name}</Modal.Title>
+            <Modal.Title>Help us know you better</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-          <RecommendedSize/>
-          <Container><Row className="justify-content-md-center">Please choose your size</Row></Container>
+          <Container><Row className="justify-content-md-center">{`You purchased ${name} by ${brand}.`}</Row></Container>
+          <Container><Row className="justify-content-md-center">Which size fit you the best?</Row></Container>
           <Container><Row className="justify-content-md-center">
           <ButtonGroup className="me-2 p-3" aria-label="First group">
               {sizeButtons}
@@ -54,8 +47,8 @@ const BuyModal = (props) => {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button variant="primary" onClick={onOrder}>
-              Order
+            <Button variant="primary" onClick={onSave}>
+              Save
             </Button>
           </Modal.Footer>
         </Modal>
@@ -65,9 +58,9 @@ const BuyModal = (props) => {
 
 function mapStateToProps(state) {
     return {
-      showModal: state.activeModal === 'buy',
-      activeItem: state.activeCart,
+      showModal: state.activeModal === 'feedback',
+      item: state.activeCart,    
     }
   }
   
-export default connect(mapStateToProps)(BuyModal);
+export default connect(mapStateToProps)(FeedbackModal);

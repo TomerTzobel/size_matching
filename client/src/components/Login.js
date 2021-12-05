@@ -23,7 +23,7 @@ export const Login = () => {
 
   const onRegisterClick = () => {
     registerNewUser(username, password);
-    dispatch({type: "SHOW_REGISTER"});
+    dispatch({type: "REGISTER_MODAL"});
   }
   return (
     <>

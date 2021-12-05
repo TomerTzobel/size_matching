@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import showModal from './showModal'
+import activeModal from './activeModal'
 import items from './items'
 import userSizes from './userSizes'
 import brand from './brand'
@@ -7,11 +7,11 @@ import product from './product'
 import recommendedSize from './recommendedSize'
 import searchText from './searchText'
 import user from './user'
-import showRegisterModal from './showRegisterModal'
 import noResultsMessage from './noResultsMessage'
+import activeCart from './activeCart'
 
 export default combineReducers({
-  showModal,
+  activeModal,
   items,
   userSizes,
   brand,
@@ -19,6 +19,6 @@ export default combineReducers({
   recommendedSize,
   searchText,
   user,
-  showRegisterModal,
   noResultsMessage,
+  activeCart,
 })

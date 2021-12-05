@@ -5,7 +5,8 @@ import Form from "react-bootstrap/Form";
 import { connect, useDispatch } from "react-redux";
 import { brandList } from "../data/brands";
 import { productList } from '../data/products'
-import { fetchData } from '../utils/fetchData';
+import { fetchProductAndBrand, fetchProduct } from '../utils/fetchData';
+
 
 const SearchBar = (props) => {
   const { searchText } = props;
@@ -19,7 +20,17 @@ const SearchBar = (props) => {
     dispatch({ type: "SET_SEARCH", payload: { text: value } });
 
   const onSearch = (searchKey) => {
+      if(productList.includes(searchKey)){
+        fetchProduct(searchKey);
+        dispatch({ type: "SET_SEARCH_SUCCESS" });
+        return;
+      }
+
       const words = searchKey.split(' ');
+      if (words.length === 1) {
+        notFound('search key is not a product');
+        return;
+      }
       if (words.length !== 2) {
           notFound('length != 2');
           return;
@@ -44,13 +55,13 @@ const SearchBar = (props) => {
   }
 
   const getCards = (brand, productType) => {      
-      fetchData(productType, brand);
-      dispatch({type: `SET_BRAND`, payload: brand});
-      dispatch({type: `SET_PRODUCT`, payload: productType})
+    fetchProductAndBrand(productType, brand);
+    dispatch({type: `SET_BRAND`, payload: brand});
+    dispatch({type: `SET_PRODUCT`, payload: productType})
 }
 
   return (
-    <Container fluid className="w-50 mt-4">
+    <Container fluid className="w-50 mt-4 mb-3">
       <Row>
         <Col>
           <Form.Control

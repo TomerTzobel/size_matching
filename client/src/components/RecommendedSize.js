@@ -3,15 +3,15 @@ import { ProgressBar, Container, Row, Col } from "react-bootstrap";
 import { connect } from 'react-redux';
 
 const RecommendedSize = (props) => {
-  const { recommendedSize } = props; //todo - get from server
+  const { recommendedSize } = props;
   return (
     <div>
       <Container
         fluid
-        className="w-50 p-2 mt-3 mb-3 border border-secondary rounded bg-light"
+        className="p-3 mt-3 mb-3 border border-secondary rounded bg-light"
       >
-        <h3> Based on your shopping history, we think the best fit for you is: </h3>
-        <Row className='mt-3'>
+        <h4> Based on your shopping history, the best fit for you is: </h4>
+        <Row className='mt-3 text-center'>
           <Col> XS </Col>
           <Col> S </Col>
           <Col> M </Col>

@@ -4,7 +4,6 @@ import { selectUsername, selectUserSizes } from "../selectors";
 export const postSizesOnRegister = () => {
   const sizes = selectUserSizes();
   console.log(sizes);
-  debugger;
   sizes.forEach(({ product, brand, size }) => {
     postSize(product, brand, size);
   });
@@ -20,3 +19,5 @@ export const postSize = (product, brand, size) => {
   };
   axios.post("http://localhost:5000/addsize", record);
 };
+
+//todo - test

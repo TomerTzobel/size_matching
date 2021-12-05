@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { postSizesOnRegister } from "../utils/postSize";
 
 const RegisterModal = (props) => {
-  const { showRegisterModal, product, brand, newUsername } = props;
+  const { showModal, product, brand, newUsername } = props;
   const [selectedSize, setSelectedSize] = useState("");
 
   const dispatch = useDispatch();
@@ -49,7 +49,7 @@ const RegisterModal = (props) => {
       payload: newUsername,
     });
     dispatch({
-      type: "HIDE_REGISTER",
+      type: "HIDE_MODAL",
     });
     postSizesOnRegister();
   };
@@ -58,7 +58,7 @@ const RegisterModal = (props) => {
 
   return (
     <>
-      <Modal show={showRegisterModal}>
+      <Modal show={showModal}>
         <Modal.Header>
           <Modal.Title>First, let's get to know you better</Modal.Title>
         </Modal.Header>
@@ -98,7 +98,7 @@ const RegisterModal = (props) => {
 
 function mapStateToProps(state) {
   return {
-    showRegisterModal: state.showRegisterModal,
+    showModal: state.activeModal === 'register',
     product: state.product,
     brand: state.brand,
   };
