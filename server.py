@@ -91,7 +91,7 @@ def login():
         username = repr(str(username))
         password= repr(str(password))
         mycursor.execute("SELECT COUNT(*) FROM users WHERE name = %s" % (username))
-        if(mycursor.fetchone()[0] > 0): #if the user alreay exist, just change password
+        if(int(mycursor.fetchone()[0]) > 0): #if the user alreay exist, just change password
             mycursor.execute("UPDATE users SET password = %s WHERE name = %s" % (password,username))
         else:
             mycursor.execute("INSERT INTO users (name, password) VALUES(%s, %s)", (username, password))
@@ -104,8 +104,11 @@ def login():
         password = dic["password"]
         username = repr(str(username))
         password= repr(str(password))
+        mycursor.execute("SELECT COUNT(*) FROM users WHERE name = %s" % (username))
+        if (int(mycursor.fetchone()[0]) == 0):  # the user not exist
+            return "0"  # fail
         mycursor.execute("SELECT password FROM users WHERE name = %s" % (username))
-        x = mycursor[0][0] #or just mycursor[0]
+        x = mycursor.fetchone()[0] #or just mycursor[0]
         if (x == password):
             return "1" #success
         else:
