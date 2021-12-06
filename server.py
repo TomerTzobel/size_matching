@@ -15,9 +15,9 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="aaat", #our last name first char's, change it if you need
-    # passwd ="abc70807", # for tomer, need to stay in comment
-    # database="testforme" #part 1 - run after part 2
+    #passwd="aaat", #our last name first char's, change it if you need
+    passwd ="abc70807", # for tomer, need to stay in comment
+    database="testforme" #part 1 - run after part 2
     )
 
 mycursor = db.cursor() # making
@@ -86,32 +86,28 @@ def login():
         dic = request.get_json(force=True)
         username = dic["username"]
         password = dic["password"]
-        username = repr(str(username))
-        password= repr(str(password))
-        mycursor.execute("SELECT COUNT(*) FROM users WHERE name = %s" % (username))
-        if(int(mycursor.fetchone()[0]) > 0): #if the user alreay exist, just change password
-            mycursor.execute("UPDATE users SET password = %s WHERE name = %s" % (password,username))
+        mycursor.execute("SELECT COUNT(*) FROM users WHERE (`name`) = %s", (str(username),))
+        count = mycursor.fetchall()[0][0]
+        if (count != 0): #if the user alreay exist, just change password
+            mycursor.execute("UPDATE users SET password = %s WHERE name = %s", (str(password),str(username)))
         else:
-            mycursor.execute("INSERT INTO users (name, password) VALUES(%s, %s)", (username, password))
-        print(f"registered new user: {username}, updates users dict: ")
+            mycursor.execute("INSERT INTO users (`name`, `password`) VALUES(%s, %s)", (str(username), str(password)))
+        #print(f"registered new user: {username}, updates users dict: ")
         db.commit() #commit changes to our DB
         return "1"
     if request.method == "GET":
         dic = request.args.to_dict()
         username = dic["username"]
         password = dic["password"]
-        username = repr(str(username))
-        password= repr(str(password))
-        mycursor.execute("SELECT COUNT(*) FROM users WHERE name = %s" % (username))
-        if (int(mycursor.fetchone()[0]) == 0):  # the user not exist
+        mycursor.execute("SELECT COUNT(*) FROM users WHERE (`name`) = %s", (str(username),))
+        count = mycursor.fetchall()[0][0]
+        if (count == 0):
             return "0"  # fail
-        mycursor.execute("SELECT password FROM users WHERE name = %s" % (username))
-        x = mycursor.fetchone()[0] #or just mycursor[0]
-        if (x == password):
+        mycursor.execute("SELECT password FROM users WHERE name = %s", (str(username),))
+        result = mycursor.fetchall()[0][0]
+        if (result == password):
             return "1" #success
-        else:
-            return "0" #fail
-
+        return "0"
 
 
 # @app.route("/login", methods=["POST","GET"])
@@ -124,6 +120,8 @@ def login():
 #         password = dic["password"]
 #         #username = request.form.get("username")
 #         #password = request.form.get("password")
+#         print(username)
+#         print(type(username))
 #         passwordsDict.update({username:password})
 #         print(f"registered new user: {username}, updates users dict: ")
 #         print(passwordsDict)
@@ -133,12 +131,14 @@ def login():
 #         #dic = json.loads(dic)
 #         username = dic.get("username")
 #         password = dic.get("password")
+#         print(username)
+#         print(type(username))
 #         x = passwordsDict.get(username)
 #         if (x == password):
 #             return "1" #success
 #         else:
 #             return "0" #fail
-#
+
 
 def translateSize(size):
     if (size == "XS"):
