@@ -88,8 +88,9 @@ def login():
         password = dic["password"]
         mycursor.execute("SELECT COUNT(*) FROM users WHERE (`name`) = %s", (str(username),))
         count = mycursor.fetchall()[0][0]
-        if (count != 0): #if the user alreay exist, just change password
-            mycursor.execute("UPDATE users SET password = %s WHERE name = %s", (str(password),str(username)))
+        if (count != 0): #if the user already exist
+            # mycursor.execute("UPDATE users SET password = %s WHERE name = %s", (str(password),str(username)))
+            return "0"
         else:
             mycursor.execute("INSERT INTO users (`name`, `password`) VALUES(%s, %s)", (str(username), str(password)))
         #print(f"registered new user: {username}, updates users dict: ")
