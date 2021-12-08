@@ -23,9 +23,17 @@ db = mysql.connector.connect(
 mycursor = db.cursor() # making
 # part 2 - run first and then set back to comment
 # mycursor.execute("CREATE DATABASE testforme") #run only one time
+
+#new table!!!!!!!!!!!!!!!!!!!
+# mycursor.execute("CREATE TABLE users_test (user_id int PRIMARY KEY AUTO_INCREMENT, user_name VARCHAR(50), password VARCHAR(10), nike_shirt ENUM('S', 'M', 'L', 'XL'),"
+#                "mango_shirt ENUM('S', 'M', 'L', 'XL'), gap_shirt ENUM('S', 'M', 'L', 'XL'),"
+#                  "reebok_shirt ENUM('S', 'M', 'L', 'XL'), mango_dress ENUM('S', 'M', 'L', 'XL'), yanga_dress ENUM('S', 'M', 'L', 'XL'),"
+#                  "reebok_jacket ENUM('S', 'M', 'L', 'XL'), adidas_jacket ENUM('S', 'M', 'L', 'XL'), mango_jacket ENUM('S', 'M', 'L', 'XL'),"
+#                  "puma_jacket ENUM('S', 'M', 'L', 'XL'))")
+
+
 # mycursor.execute("CREATE TABLE users (name VARCHAR(50), password VARCHAR(50),"
 #                 "personID int PRIMARY KEY AUTO_INCREMENT)") #run only one time
-
 
 #DB on server, only for demonstratcdion
 nikeToAdidas = [{'S':100,'M':50,'L':20},{'S':0,'M':800,'L':200},{'S':1,'M':5,'L':2}]
@@ -83,32 +91,88 @@ def getbyword(productType):
 @cross_origin()
 def login():
     if request.method == "POST":
+        mycursor = db.cursor()
         dic = request.get_json(force=True)
         username = dic["username"]
         password = dic["password"]
-        mycursor.execute("SELECT COUNT(*) FROM users WHERE (`name`) = %s", (str(username),))
+        mycursor.execute("SELECT COUNT(*) FROM users_test WHERE (`user_name`) = %s", (str(username),))
         count = mycursor.fetchall()[0][0]
         if (count != 0): #if the user already exist
             # mycursor.execute("UPDATE users SET password = %s WHERE name = %s", (str(password),str(username)))
             return "0"
         else:
-            mycursor.execute("INSERT INTO users (`name`, `password`) VALUES(%s, %s)", (str(username), str(password)))
+            mycursor.execute("INSERT INTO users_test (`user_name`, `password`) VALUES(%s, %s)", (str(username), str(password)))
         #print(f"registered new user: {username}, updates users dict: ")
         db.commit() #commit changes to our DB
         return "1"
     if request.method == "GET":
+        mycursor = db.cursor()
         dic = request.args.to_dict()
         username = dic["username"]
         password = dic["password"]
-        mycursor.execute("SELECT COUNT(*) FROM users WHERE (`name`) = %s", (str(username),))
+        mycursor.execute("SELECT COUNT(*) FROM users_test WHERE (`user_name`) = %s", (str(username),))
         count = mycursor.fetchall()[0][0]
         if (count == 0):
             return "0"  # fail
-        mycursor.execute("SELECT password FROM users WHERE name = %s", (str(username),))
+        mycursor.execute("SELECT password FROM users_test WHERE user_name = %s", (str(username),))
         result = mycursor.fetchall()[0][0]
         if (result == password):
             return "1" #success
         return "0"
+
+@app.route("/add",methods=["POST"])
+@cross_origin()
+def add():
+    if request.method == "POST":
+        mycursor = db.cursor()
+        dic = request.get_json(force=True)
+        user = dic["username"]
+        size = dic["size"]
+        brand = dic["brnad"]
+        type = dic["type"]
+        column_name = brand+"_"+type
+        mycursor.execute(f"UPDATE users_test SET {column_name} = %s WHERE `user_name` = %s", (str(size), str(user)))
+        db.commit()
+    return "1" #should always success
+
+@app.route("/history/<string:user>")
+@cross_origin()
+def history(user):
+    mycursor = db.cursor(dictionary=True)
+    mycursor.execute("SELECT * FROM users_test WHERE `user_name` = %s", (user,))
+    dict = mycursor.fetchall()[0]
+    del dict['user_id']
+    del dict['user_name']
+    del dict['password']
+    dict = {k: v for k, v in dict.items() if v is not None}
+    my_dict = {}
+    i = 0
+    for key in  dict:
+        toAdd = {}
+        values = key.split('_')
+        toAdd['brand'] = values[0]
+        toAdd['type'] = values[1]
+        toAdd['size'] = dict[key]
+        my_dict[i] = toAdd
+        i += 1
+    mycursor = db.cursor()
+    db.commit()
+    return my_dict
+
+
+# @app.route("/add/<string:user>/<string:brand>/<string:productType>/<string:size>",methods=["POST","GET"])
+# @cross_origin()
+# def add(user,brand,productType,size):
+#     # if request.method == "POST":
+#     #     print("1")
+#     #     return "1"
+#     column_name = brand+"_"+productType
+#     mycursor.execute(f"UPDATE users_test SET {column_name} = %s WHERE `user_name` = %s", (size, user))
+#     # mycursor.execute("SELECT * FROM users_test")
+#     # for x in mycursor:
+#     #     print(x)
+#     db.commit()
+#     return "0"
 
 
 # @app.route("/login", methods=["POST","GET"])
