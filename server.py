@@ -128,7 +128,7 @@ def add():
         dic = request.get_json(force=True)
         user = dic["username"]
         size = dic["size"]
-        brand = dic["brnad"]
+        brand = dic["brand"]
         type = dic["type"]
         column_name = brand+"_"+type
         mycursor.execute(f"UPDATE users_test SET {column_name} = %s WHERE `user_name` = %s", (str(size), str(user)))
