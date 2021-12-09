@@ -39,28 +39,42 @@ mycursor = db.cursor() # making
 nikeToAdidas = [{'S':100,'M':50,'L':20},{'S':0,'M':800,'L':200},{'S':1,'M':5,'L':2}]
 passwordsDict = dict()
 
-#if the brand is 'Adidas' and the Typs is 'shirt' should return 64
-#for exmaple our host alreay buy nike shirt with size 'S' (index 1 in the array)
-#among all the people that are size Small in Nike:
-# 800 of them are size M in adidas
-# 200 of them are size L in adids
-# therefor we shuld get the number for recommend 64 (when 60 is M and 80 is L)
-@app.route("/recommend/<string:brand>/<string:productType>")
+#try insert: 'tom', 'mango','shirt, the result will be 37.5
+@app.route("/recommend/<string:user>/<string:brand>/<string:productType>")
 @cross_origin()
-def recommend(brand,productType):
-    countSize = [0 for i in range(5)]
-    if (productType == "shirt" and brand == "adidas"):
-        number = 0
-        dict = nikeToAdidas[1] #should be replace with DB lists
-        for key, value in dict.items():
-            countSize[location(key)] += value
-        # algorithm
-        totalCount = int(sum(countSize))
-        for i in range(5):
-            sizeNum = (i + 1) * 20
-            number += sizeNum * (countSize[i] / totalCount)
-        return str(number) #retun 64 if success
-    return "0" #return 0 if fail
+def recommend(user,brand,productType):
+    value = 0
+    column_name = brand + "_" + productType
+    dictSizes = build_dict(user,column_name)
+    # algorithm
+    totalCount = 0
+    for size in dictSizes:
+        totalCount += int(dictSizes[size])
+    for size in dictSizes:
+        sizeNum = translateSize(size)
+        value += sizeNum * (dictSizes[size] / totalCount)
+    return str(value) #retun 64 if success
+
+
+def build_dict(user,column_name):
+    sizeDict = {'XS':0,'S':0,'M':0,'L':0,'XL':0}
+    mycursor = db.cursor(dictionary=True)
+    mycursor.execute("SELECT * FROM users_test WHERE `user_name` = %s", (user,))
+    historyDict = mycursor.fetchall()[0]
+    historyDict = {k: v for k, v in historyDict.items() if v is not None}
+    del historyDict['user_id']
+    del historyDict['user_name']
+    del historyDict['password']
+    mycursor = db.cursor()
+    for brandKey in historyDict:
+        size_for_brandKey = historyDict[brandKey]
+        for sizeKey in sizeDict:
+            if (sizeKey != 'XS'):
+                mycursor.execute(f"SELECT COUNT(*) FROM users_test WHERE {brandKey} = %s AND {column_name} = %s", (str(size_for_brandKey),str(sizeKey)))
+                count = mycursor.fetchall()[0][0]
+                sizeDict[sizeKey] += int(count)
+    return sizeDict
+
 
 #in order to test use brand- nike and type-shirt
 @app.route("/get/<string:brand>/<string:productType>")
@@ -207,20 +221,20 @@ def history(user):
 
 def translateSize(size):
     if (size == "XS"):
-        return 20
+        return 0
     if (size == "S"):
-        return 40
+        return 25
     if (size == "M"):
-        return 60
+        return 50
     if (size == "L"):
-        return 80
+        return 75
     if (size == "Xl"):
         return 100
     else:
         return 0 #translate fail
 
-def location(size):
-    return int((translateSize(size))/20)-1
+# def location(size):
+#     return int((translateSize(size))/20)-1
 
 #to start the server
 if __name__ =="__main__":
