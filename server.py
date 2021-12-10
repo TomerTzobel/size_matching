@@ -46,7 +46,7 @@ def recommend(user,brand,productType):
     dictSizes = build_dict(user,column_name)
     if (isinstance(dictSizes, int)): #the user already buy product from the same type and brand
         return str(dictSizes)
-    # algorithm
+    #algorithm
     totalCount = 0
     for size in dictSizes:
         totalCount += int(dictSizes[size])
