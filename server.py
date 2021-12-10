@@ -36,24 +36,26 @@ mycursor = db.cursor() # making
 #                 "personID int PRIMARY KEY AUTO_INCREMENT)") #run only one time
 
 #DB on server, only for demonstratcdion
-nikeToAdidas = [{'S':100,'M':50,'L':20},{'S':0,'M':800,'L':200},{'S':1,'M':5,'L':2}]
 passwordsDict = dict()
 
-#try insert: 'tom', 'mango','shirt, the result will be 37.5
 @app.route("/recommend/<string:user>/<string:brand>/<string:productType>")
 @cross_origin()
 def recommend(user,brand,productType):
     value = 0
     column_name = brand + "_" + productType
     dictSizes = build_dict(user,column_name)
+    if (isinstance(dictSizes, int)): #the user already buy product from the same type and brand
+        return str(dictSizes)
     # algorithm
     totalCount = 0
     for size in dictSizes:
         totalCount += int(dictSizes[size])
+    if(totalCount == 0): #not enough data
+        return "-1"
     for size in dictSizes:
         sizeNum = translateSize(size)
         value += sizeNum * (dictSizes[size] / totalCount)
-    return str(value) #retun 64 if success
+    return str(value)
 
 
 def build_dict(user,column_name):
@@ -61,6 +63,9 @@ def build_dict(user,column_name):
     mycursor = db.cursor(dictionary=True)
     mycursor.execute("SELECT * FROM users_test WHERE `user_name` = %s", (user,))
     historyDict = mycursor.fetchall()[0]
+    if (historyDict[column_name] != None): #the user already buy product from the same type and brand
+        size = historyDict[column_name]
+        return translateSize(size)
     historyDict = {k: v for k, v in historyDict.items() if v is not None}
     del historyDict['user_id']
     del historyDict['user_name']
@@ -69,7 +74,7 @@ def build_dict(user,column_name):
     for brandKey in historyDict:
         size_for_brandKey = historyDict[brandKey]
         for sizeKey in sizeDict:
-            if (sizeKey != 'XS'):
+            if (sizeKey != 'XS'): #changed this later!!!!!!!!!!!!
                 mycursor.execute(f"SELECT COUNT(*) FROM users_test WHERE {brandKey} = %s AND {column_name} = %s", (str(size_for_brandKey),str(sizeKey)))
                 count = mycursor.fetchall()[0][0]
                 sizeDict[sizeKey] += int(count)
@@ -228,7 +233,7 @@ def translateSize(size):
         return 50
     if (size == "L"):
         return 75
-    if (size == "Xl"):
+    if (size == "XL"):
         return 100
     else:
         return 0 #translate fail
