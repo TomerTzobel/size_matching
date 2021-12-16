@@ -4,12 +4,12 @@ db = mysql.connector.connect(
     host="localhost",
     user="root",
     passwd="aaat",  # our last name first char's
-    database="testforme"
+    database="size_matching"
 )
 
 mycursor = db.cursor()
 
-mycursor.execute("CREATE TABLE users_test (user_id int PRIMARY KEY AUTO_INCREMENT, user_name VARCHAR(50) NOT NULL, password VARCHAR(10) NOT NULL, nike_shirt ENUM('XS', 'S', 'M', 'L', 'XL'),"
+mycursor.execute("CREATE TABLE users (user_id int PRIMARY KEY AUTO_INCREMENT, user_name VARCHAR(50) NOT NULL, password VARCHAR(10) NOT NULL, nike_shirt ENUM('XS', 'S', 'M', 'L', 'XL'),"
                "mango_shirt ENUM('XS', 'S', 'M', 'L', 'XL'), gap_shirt ENUM('XS', 'S', 'M', 'L', 'XL'),"
                 "reebok_shirt ENUM('XS', 'S', 'M', 'L', 'XL'), anthropologie_shirt ENUM('XS', 'S', 'M', 'L', 'XL'), yanga_shirt ENUM('XS', 'S', 'M', 'L', 'XL'),"
                 "only_shirt ENUM('XS', 'S', 'M', 'L', 'XL'),"

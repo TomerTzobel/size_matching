@@ -8,4 +8,4 @@ db = mysql.connector.connect(
 
 mycursor = db.cursor()
 
-mycursor.execute("CREATE DATABASE testforme")
+mycursor.execute("CREATE DATABASE size_matching")
