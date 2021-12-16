@@ -1,3 +1,6 @@
+
+# DO NOT USE THIS ONLY FOR AVI'S TESTING
+
 import mysql.connector
 import string
 import random
@@ -22,23 +25,27 @@ mycursor = db.cursor()
 
 
 shirts = ["nike_shirt", "mango_shirt", "gap_shirt", "reebok_shirt", "anthropologie_shirt", "yanga_shirt", "only_shirt"]
+
 dresses = ["mango_dress", "yanga_dress", "only_dress", "gap_dress", "anthropologie_dress", "guess_dress",
            "glamorous_dress"]
+
 jackets = ["reebok_jacket", "adidas_jacket", "mango_jacket", "puma_jacket", "only_jacket", "gap_jacket"]
+
 sizes = ['XS', 'S', 'M', 'L', 'XL']
 
 first_names = ["Shachar", "Hadas", "Yuval", "Orit", "Hani", "Daniel", "Noa", "Rina", "Amira", "Maya", "Ruth", "Dina",
-               "Sharon", "Sara",  # you can add names if you like
+               "Sharon", "Sara", "Nofar", "Tanya", "Anna", "Anat", "Yael", "Johanna",  # you can add names if you like
                "Roni", "Lihi", "Kim", "Shir", "Orna", "Rachel", "Dona", "Yasmin", "Michal", "Tamar", "Shani", "Galit",
-               "Samira", "Qamar", "Nasrin"
-                                  "Dana", "Avivit", "Noy", "Rotem", "Hadar", "Shaked", "Monica", "Sara", "Shaked",
-               "carmella", "Dvora", "Gitit", "Nadin", "Taylor"]
+               "Samira", "Qamar", "Nasrin", "Dana", "Avivit", "Noy", "Rotem", "Hadar", "Shaked", "Monica", "Sara", "Shaked",
+               "carmella", "Dvora", "Gitit", "Nadin", "Taylor", "Jessica"]
+
 last_names = ["James", "Levi", "Cohen", "Robinson", "Jordan", "Golan", "Zait", "Mizrahi", "Yasin", "Brown", "Peretz",
-              "Israeli", "Smith",  # you can add names if you like
+              "Israeli", "Smith", "Rubinshtein", "Silver", "Mazor", "Yamin", # you can add names if you like
               "Barak", "Narkis", "Obama", "Hassan", "Diab", "Klein", "Sade", "Zisman", "Dor", "Chen", "Azaria", "Baron",
               "Clooney",
               "Akirov", "Gold", "Zuckerberg", "Clinton", "Rosen", "Alperon", "Kennedy", "Shuster", "Jameson", "Levin",
               "Sapir", "Dean", "Shelbi", "Jaber"]
+
 full_names = []
 count = 0
 
