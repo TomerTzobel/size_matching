@@ -17,7 +17,7 @@ db = mysql.connector.connect(
     user="root",
     #passwd="aaat", #our last name first char's, change it if you need
     passwd ="abc70807", # for tomer, need to stay in comment
-    database="testforme" #part 1 - run after part 2
+    database="size_matching" #part 1 - run after part 2
     )
 
 mycursor = db.cursor() # making
@@ -36,14 +36,14 @@ mycursor = db.cursor() # making
 #                 "personID int PRIMARY KEY AUTO_INCREMENT)") #run only one time
 
 #DB on server, only for demonstratcdion
-passwordsDict = dict()
+#passwordsDict = dict()
 
 @app.route("/recommend/<string:user>/<string:brand>/<string:productType>")
 @cross_origin()
 def recommend(user,brand,productType):
     value = 0
     column_name = brand + "_" + productType
-    dictSizes = build_dict(user,column_name)
+    dictSizes = build_dict(user,column_name,productType)
     if (isinstance(dictSizes, int)): #the user already buy product from the same type and brand
         return str(dictSizes)
     #algorithm
@@ -58,10 +58,10 @@ def recommend(user,brand,productType):
     return str(value)
 
 
-def build_dict(user,column_name):
+def build_dict(user,column_name,productType):
     sizeDict = {'XS':0,'S':0,'M':0,'L':0,'XL':0}
     mycursor = db.cursor(dictionary=True)
-    mycursor.execute("SELECT * FROM users_test WHERE `user_name` = %s", (user,))
+    mycursor.execute("SELECT * FROM users WHERE `user_name` = %s", (user,))
     historyDict = mycursor.fetchall()[0]
     if (historyDict[column_name] != None): #the user already buy product from the same type and brand
         size = historyDict[column_name]
@@ -73,11 +73,13 @@ def build_dict(user,column_name):
     mycursor = db.cursor()
     for brandKey in historyDict:
         size_for_brandKey = historyDict[brandKey]
+        x = brandKey.split("_")
+        if (x[1] != productType): #make sure we count only the shopping history from the same product type
+            continue
         for sizeKey in sizeDict:
-            if (sizeKey != 'XS'): #changed this later!!!!!!!!!!!!
-                mycursor.execute(f"SELECT COUNT(*) FROM users_test WHERE {brandKey} = %s AND {column_name} = %s", (str(size_for_brandKey),str(sizeKey)))
-                count = mycursor.fetchall()[0][0]
-                sizeDict[sizeKey] += int(count)
+            mycursor.execute(f"SELECT COUNT(*) FROM users WHERE {brandKey} = %s AND {column_name} = %s", (str(size_for_brandKey),str(sizeKey)))
+            count = mycursor.fetchall()[0][0]
+            sizeDict[sizeKey] += int(count)
     return sizeDict
 
 
@@ -114,13 +116,13 @@ def login():
         dic = request.get_json(force=True)
         username = dic["username"]
         password = dic["password"]
-        mycursor.execute("SELECT COUNT(*) FROM users_test WHERE (`user_name`) = %s", (str(username),))
+        mycursor.execute("SELECT COUNT(*) FROM users WHERE (`user_name`) = %s", (str(username),))
         count = mycursor.fetchall()[0][0]
         if (count != 0): #if the user already exist
             # mycursor.execute("UPDATE users SET password = %s WHERE name = %s", (str(password),str(username)))
             return "0"
         else:
-            mycursor.execute("INSERT INTO users_test (`user_name`, `password`) VALUES(%s, %s)", (str(username), str(password)))
+            mycursor.execute("INSERT INTO users (`user_name`, `password`) VALUES(%s, %s)", (str(username), str(password)))
         #print(f"registered new user: {username}, updates users dict: ")
         db.commit() #commit changes to our DB
         return "1"
@@ -129,11 +131,11 @@ def login():
         dic = request.args.to_dict()
         username = dic["username"]
         password = dic["password"]
-        mycursor.execute("SELECT COUNT(*) FROM users_test WHERE (`user_name`) = %s", (str(username),))
+        mycursor.execute("SELECT COUNT(*) FROM users WHERE (`user_name`) = %s", (str(username),))
         count = mycursor.fetchall()[0][0]
         if (count == 0):
             return "0"  # fail
-        mycursor.execute("SELECT password FROM users_test WHERE user_name = %s", (str(username),))
+        mycursor.execute("SELECT password FROM users WHERE user_name = %s", (str(username),))
         result = mycursor.fetchall()[0][0]
         if (result == password):
             return "1" #success
@@ -150,7 +152,7 @@ def add():
         brand = dic["brand"]
         type = dic["type"]
         column_name = brand+"_"+type
-        mycursor.execute(f"UPDATE users_test SET {column_name} = %s WHERE `user_name` = %s", (str(size), str(user)))
+        mycursor.execute(f"UPDATE users SET {column_name} = %s WHERE `user_name` = %s", (str(size), str(user)))
         db.commit()
     return "1" #should always success
 
@@ -158,7 +160,7 @@ def add():
 @cross_origin()
 def history(user):
     mycursor = db.cursor(dictionary=True)
-    mycursor.execute("SELECT * FROM users_test WHERE `user_name` = %s", (user,))
+    mycursor.execute("SELECT * FROM users WHERE `user_name` = %s", (user,))
     dict = mycursor.fetchall()[0]
     del dict['user_id']
     del dict['user_name']
@@ -177,7 +179,6 @@ def history(user):
     mycursor = db.cursor()
     db.commit()
     return my_dict
-
 
 # @app.route("/add/<string:user>/<string:brand>/<string:productType>/<string:size>",methods=["POST","GET"])
 # @cross_origin()
