@@ -18,7 +18,7 @@ const Cards = (props) => {
     getRecommendation();
   };
   
-  if (noResultsMessage){
+  if (noResultsMessage || !items.length){
     return <NoResults />
   }
 
