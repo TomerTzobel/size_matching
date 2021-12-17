@@ -2,7 +2,6 @@ import { React , useState} from 'react'
 import { connect, useDispatch } from 'react-redux';
 import { Button, ButtonGroup, Container, Modal, Row } from 'react-bootstrap';
 import { sizes } from '../data/sizes'
-import { selectBrand, selectProduct } from '../selectors';
 import { postSize } from '../utils/postSize';
 import RecommendedSize from './RecommendedSize'
 
@@ -16,9 +15,8 @@ const BuyModal = (props) => {
     
     const handleClose = () => dispatch({type: "HIDE_MODAL"});
     const onOrder = () => {
-        const product = selectProduct();
-        const brand = selectBrand();
-        dispatch({ // todo - check server updates
+        const { product, brand } = activeItem;
+        dispatch({
             type: "ADD_SIZE", 
             payload: {
                 product,
