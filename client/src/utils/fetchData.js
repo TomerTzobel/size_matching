@@ -10,7 +10,6 @@ export const fetchProductAndBrand = async (product, brand) => {
             imgUrl: item.imgURL,
             name: item.Name
         }));
-        console.log(items);
         if (items.length) {
             store.dispatch({type: "SET_ITEMS", payload: items});
         } else {
@@ -24,7 +23,6 @@ export const fetchProductAndBrand = async (product, brand) => {
 
 export const fetchProduct = async (product) => {
     try {
-        console.log("fetching: ", product);
         const { data } = await axios.get(`http://localhost:5000/get/${product}`);
         const items = Object.values(data).map(item => ({
             brand: item.Brand,
@@ -32,8 +30,6 @@ export const fetchProduct = async (product) => {
             imgUrl: item.imgURL,
             name: item.Name
         }));
-        console.log("setting items: ");
-        console.log(items);
         store.dispatch({type: "SET_ITEMS", payload: items});
     } catch {
         store.dispatch({type: "SET_ITEMS", payload: []} )
