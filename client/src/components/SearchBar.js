@@ -14,13 +14,14 @@ const SearchBar = (props) => {
   
   if (!searchText){
     dispatch({type: "SET_EMPTY_SEARCH"});
+    dispatch({ type: 'SET_ITEMS', payload: [] });
   }
   
   const textChangeHandler = (value) =>
     dispatch({ type: "SET_SEARCH", payload: { text: value } });
 
   const onSearch = (searchKey) => {
-      if(productList.includes(searchKey)){
+      if(productList.includes(searchKey) || brandList.includes(searchKey)){
         fetchProduct(searchKey);
         dispatch({ type: "SET_SEARCH_SUCCESS" });
         return;
@@ -51,6 +52,7 @@ const SearchBar = (props) => {
 
   const notFound = (err) => {
       dispatch({ type: "SET_NOT_FOUND" });
+      dispatch({type: "SET_ITEMS", payload: []} );
       console.log(err);
   }
 
@@ -66,7 +68,7 @@ const SearchBar = (props) => {
         <Col>
           <Form.Control
             type="text"
-            placeholder="Search for a category and a brand, e.g - Dress Mango"
+            placeholder="Search for a category and/or a brand, e.g - Dress Mango, shirt"
             value={searchText}
             onChange={(e) => textChangeHandler(e.target.value)}
           />
