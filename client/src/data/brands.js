@@ -5,9 +5,10 @@ export const brandList = [
     'reebok',
     'gap',
     'adidas',
-    'american-eagle',
-    'vero-moda',
+    'only',
+    'glamorous',
     'yanga',
     'puma',
-    'tommy-hilgifer'
+    'guess',
+    'anthropologie'
 ]
