@@ -1,9 +1,9 @@
 import React from "react";
 import { Dropdown } from "./Dropdown";
-import { brandList } from "../data/brands";
 import { productList } from "../data/products";
 import { connect } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
+import { getBrandsByProductType } from "../utils/getBrandsByProductType";
 
 const Filters = (props) => {
   const { activeBrand, activeProduct } = props;
@@ -21,9 +21,9 @@ const Filters = (props) => {
               />
             </Col>
             <Col>
-              <Dropdown //todo - make sure long brands doesn't break
+              <Dropdown
                 filter="BRAND"
-                options={brandList}
+                options={getBrandsByProductType(activeProduct)}
                 triggerText={activeBrand || "Brand"}
               />
             </Col>

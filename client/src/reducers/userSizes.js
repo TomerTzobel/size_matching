@@ -10,5 +10,3 @@ export default function userSizes(state = [], action) {
     }
   }
   
-
-  //todo - fetch
