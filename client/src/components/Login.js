@@ -14,16 +14,20 @@ export const Login = () => {
   const onLogin = async () => {
     const isAuthenticated = await authenticate(username, password);
     if (!isAuthenticated) {
-      setErr("Something went wrong, please try again");
+      setErr("Wrong username or password, please try again");
     }
   };
 
   const dispatch = useDispatch();
   const isEmptyFields = ! (username && password);
 
-  const onRegisterClick = () => {
-    registerNewUser(username, password);
-    dispatch({type: "REGISTER_MODAL"});
+  const onRegisterClick = async () => {
+    const userExists = await registerNewUser(username, password);
+    if (userExists) {
+      setErr("This user already exists");
+    } else {
+      dispatch({type: "REGISTER_MODAL"});
+    }
   }
   return (
     <>

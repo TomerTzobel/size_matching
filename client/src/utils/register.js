@@ -1,9 +1,13 @@
 import axios from "axios";
 
-export const registerNewUser = (username, password) => {
+export const registerNewUser = async (username, password) => {
   const record = {
     username,
     password,
   };
-  axios.post("http://localhost:5000/login", record);
+  const { data } = await axios.post("http://localhost:5000/login", record);
+  if (data === 0){
+    return true
+  }
+  return false;
 };
