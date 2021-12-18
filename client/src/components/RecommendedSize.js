@@ -19,9 +19,13 @@ const RecommendedSize = (props) => {
         <h4> Based on your shopping history, the best fit for you is: </h4>
         <Row className='mt-3 text-center'>
           <Col> XS </Col>
+          <Col></Col>
           <Col> S </Col>
+          <Col></Col>
           <Col> M </Col>
+          <Col></Col>
           <Col> L </Col>
+          <Col></Col>
           <Col> XL </Col>
         </Row>
         <Row className='mb-3'>
