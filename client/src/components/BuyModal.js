@@ -1,30 +1,18 @@
-import { React , useState} from 'react'
+import { React } from 'react'
 import { connect, useDispatch } from 'react-redux';
 import { Button, ButtonGroup, Container, Modal, Row } from 'react-bootstrap';
 import { sizes } from '../data/sizes'
-import { postSize } from '../utils/postSize';
 import RecommendedSize from './RecommendedSize'
 
 const BuyModal = (props) => {
     const { showModal, activeItem } = props;
-    const [selectedSize, setSelectedSize] = useState("s");
     const dispatch = useDispatch();
     const sizeButtons = sizes.map( size => (
-        <Button key={size} onClick={()=>setSelectedSize(size)}>{size}</Button>
+        <Button key={size}>{size}</Button>
     ))
     
     const handleClose = () => dispatch({type: "HIDE_MODAL"});
     const onOrder = () => {
-        const { product, brand } = activeItem;
-        dispatch({
-            type: "ADD_SIZE", 
-            payload: {
-                product,
-                brand,
-                size: selectedSize
-            }
-        });
-        postSize(product, brand, selectedSize);
         handleClose();
         setTimeout(() => {
           dispatch({
