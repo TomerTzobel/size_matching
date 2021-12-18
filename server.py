@@ -151,6 +151,8 @@ def add():
         size = dic["size"]
         brand = dic["brand"]
         type = dic["type"]
+        brand = brand.lower()
+        type = type.lower()
         column_name = brand+"_"+type
         mycursor.execute(f"UPDATE users SET {column_name} = %s WHERE `user_name` = %s", (str(size), str(user)))
         db.commit()
