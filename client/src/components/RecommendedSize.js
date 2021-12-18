@@ -4,6 +4,12 @@ import { connect } from 'react-redux';
 
 const RecommendedSize = (props) => {
   const { recommendedSize } = props;
+
+  if (recommendedSize === -1) {
+    return (
+      <h5>Unfortunately we don't have enough information to match your size</h5>
+    )
+  }
   return (
     <div>
       <Container
