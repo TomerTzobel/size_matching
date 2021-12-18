@@ -9,6 +9,6 @@ export const getRecommendation = async () => {
         let { data } = await axios.get(`http://localhost:5000/recommend/${user}/${brand}/${product}`);
         store.dispatch({type: "SET_RECOMMENDATION", payload: data})
     } catch {
-        store.dispatch({type: "SET_RECOMMENDATION", payload: 55})
+        store.dispatch({type: "SET_RECOMMENDATION", payload: -1})
     }
 };

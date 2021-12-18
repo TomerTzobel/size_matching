@@ -3,6 +3,8 @@ import { connect, useDispatch } from 'react-redux';
 import { Button, ButtonGroup, Container, Modal, Row } from 'react-bootstrap';
 import { sizes } from '../data/sizes'
 import { postSize } from '../utils/postSize';
+import { getUserSizes } from '../utils/getUserSizes';
+import { selectUsername } from '../selectors';
 
 const FeedbackModal = (props) => {
     const { showModal, item } = props;
@@ -16,16 +18,9 @@ const FeedbackModal = (props) => {
     
     const handleClose = () => dispatch({type: "HIDE_MODAL"});
     const onSave = () => {        
-        dispatch({
-            type: "ADD_SIZE", 
-            payload: {
-                product,
-                brand,
-                size: selectedSize
-            }
-        });
         postSize(product, brand, selectedSize);
         handleClose();
+        setTimeout(()=> {getUserSizes(selectUsername())}, 1000);
     };
 
     return (
