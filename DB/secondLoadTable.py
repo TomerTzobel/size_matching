@@ -9,8 +9,8 @@ db = mysql.connector.connect(
 
 mycursor = db.cursor()
 
-mycursor.execute("CREATE TABLE users (user_id int PRIMARY KEY AUTO_INCREMENT, user_name VARCHAR(50) NOT NULL, password VARCHAR(10) NOT NULL, nike_shirt ENUM('XS', 'S', 'M', 'L', 'XL'),"
-               "mango_shirt ENUM('XS', 'S', 'M', 'L', 'XL'), gap_shirt ENUM('XS', 'S', 'M', 'L', 'XL'),"
+mycursor.execute("CREATE TABLE users (user_id int PRIMARY KEY AUTO_INCREMENT, user_name VARCHAR(50) NOT NULL, password VARCHAR(10) NOT NULL, "
+                "nike_shirt ENUM('XS', 'S', 'M', 'L', 'XL'), mango_shirt ENUM('XS', 'S', 'M', 'L', 'XL'), gap_shirt ENUM('XS', 'S', 'M', 'L', 'XL'),"
                 "reebok_shirt ENUM('XS', 'S', 'M', 'L', 'XL'), anthropologie_shirt ENUM('XS', 'S', 'M', 'L', 'XL'), yanga_shirt ENUM('XS', 'S', 'M', 'L', 'XL'),"
                 "only_shirt ENUM('XS', 'S', 'M', 'L', 'XL'),"
                 "mango_dress ENUM('XS', 'S', 'M', 'L', 'XL'), yanga_dress ENUM('XS', 'S', 'M', 'L', 'XL'), only_dress ENUM('XS', 'S', 'M', 'L', 'XL'),"

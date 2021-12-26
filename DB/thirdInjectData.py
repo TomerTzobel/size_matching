@@ -5,7 +5,7 @@ import random
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="aaat",  # our last name first char's
+    passwd="aaat",  # our last name's first char's
     database="size_matching"
 )
 
@@ -31,7 +31,6 @@ def get_smaller_size(size):
 
 
 def check_if_small_or_big_brand(size, brand):
-    brand = brand.split('_')[0]
     if brand == "mango":
         return get_bigger_size(size)
     if brand == "gap":
@@ -39,29 +38,43 @@ def check_if_small_or_big_brand(size, brand):
     return size
 
 
-def choose_size(size, brand):
+def get_random_weights(tend_to_but_bigger_size):
+    if tend_to_but_bigger_size:
+        return (0, 80, 20)
+    else:
+        return (20, 80, 0)
+
+
+def choose_size(size, brand, tend_to_buy_bigger_size):
+    brand = brand.split('_')[0]
+    if (brand == "mango") and (size == 'XL'):
+        return 'XL'
+    if (brand == 'gap') and (size == 'XS'):
+        return 'XS'
     size = check_if_small_or_big_brand(size, brand)
+    random_weights = get_random_weights(tend_to_buy_bigger_size)
     if size == 'XS':
-        possible_sizes = ['XS', 'S']
-        return random.choices(possible_sizes, weights=(75, 25), k=1)[0]
+        possible_sizes = ['XS', 'XS', 'S']
+        return random.choices(possible_sizes, weights=random_weights, k=1)[0]
     if size == 'S':
         possible_sizes = ['XS', 'S', 'M']
-        return random.choices(possible_sizes, weights=(20, 60, 20), k=1)[0]
+        return random.choices(possible_sizes, weights=random_weights, k=1)[0]
     if size == 'M':
         possible_sizes = ['S', 'M', 'L']
-        return random.choices(possible_sizes, weights=(20, 60, 20), k=1)[0]
+        return random.choices(possible_sizes, weights=random_weights, k=1)[0]
     if size == 'L':
         possible_sizes = ['M', 'L', 'XL']
-        return random.choices(possible_sizes, weights=(20, 60, 20), k=1)[0]
+        return random.choices(possible_sizes, weights=random_weights, k=1)[0]
     if size == 'XL':
-        possible_sizes = ['L', 'XL']
-        return random.choices(possible_sizes, weights=(25, 75), k=1)[0]
+        possible_sizes = ['L', 'XL', 'XL']
+        return random.choices(possible_sizes, weights=random_weights, k=1)[0]
     raise Exception("wrong input")
 
 
 def update_db(brands, number_of_purchases, size, name):
+    tend_to_buy_bigger_size = bool(random.getrandbits(1)) # get's random boolean
     for i in range(number_of_purchases):
-        chosen_size = choose_size(size, brands[i])
+        chosen_size = choose_size(size, brands[i], tend_to_buy_bigger_size)
         sql_command = "UPDATE users SET " + brands[i] + "=%s WHERE user_name=%s"
         sql_vars = (chosen_size, name)
         mycursor.execute(sql_command, sql_vars)
@@ -83,7 +96,7 @@ first_names = ["Shachar", "Hadas", "Yuval", "Orit", "Hani", "Daniel", "Noa", "Ri
                "Roni", "Lihi", "Kim", "Shir", "Orna", "Rachel", "Dona", "Yasmin", "Michal", "Tamar", "Shani", "Galit",
                "Samira", "Qamar", "Nasrin", "Dana", "Avivit", "Noy", "Rotem", "Hadar", "Shaked", "Monica", "Sara",
                "Shaked", "Elizabeth", "Barbara", "Susan", "Nancy", "Lisa", "Betty", "Margaret", "Sandra", "Ashley"
-               "carmella", "Dvora", "Gitit", "Nadin", "Taylor", "Jessica", "Emily", "Victoria"]
+               "carmella", "Dvora", "Gitit", "Nadin", "Taylor", "Jessica", "Emily", "Victoria", "Flor"]
 
 last_names = ["James", "Levi", "Cohen", "Robinson", "Jordan", "Golan", "Zait", "Mizrahi", "Yasin", "Brown", "Peretz", # you can add names if you like
               "Israeli", "Smith", "Rubinshtein", "Silver", "Mazor", "Yamin", "Anderson", "Thomas", "Moore", "Jackson",
@@ -95,7 +108,7 @@ last_names = ["James", "Levi", "Cohen", "Robinson", "Jordan", "Golan", "Zait", "
 full_names = []
 count = 0
 
-while (count < 500):  # change to the number of women we want to insert the DB
+while (count < 700):  # change to the number of women we want to insert the DB
     name = random.choice(first_names) + "_" + random.choice(last_names)
     if name not in full_names:
         count += 1
@@ -108,9 +121,6 @@ while (count < 500):  # change to the number of women we want to insert the DB
         number_of_jacket_purchases = random.randint(2, 4)
 
         size = random.choice(sizes)
-        # shirt_size = random.choice(sizes)
-        # dress_size = random.choice(sizes)
-        # jacket_size = random.choice(sizes)
 
         chosen_shirt_brands = random.sample(shirts, number_of_shirt_purchases)
         chosen_dress_brands = random.sample(dresses, number_of_dress_purchases)
