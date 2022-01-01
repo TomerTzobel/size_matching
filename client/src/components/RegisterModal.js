@@ -6,7 +6,7 @@ import { selectBrand, selectProduct } from "../selectors";
 import Filters from "./Filters";
 import MySizes from "./MySizes";
 import { connect } from "react-redux";
-import { postSizesOnRegister } from "../utils/postSize";
+import { postSize } from "../utils/postSize";
 
 const RegisterModal = (props) => {
   const { showModal, product, brand, newUsername } = props;
@@ -31,14 +31,18 @@ const RegisterModal = (props) => {
     setSelectedSize("");
   };
   const addSize = () => {
+    const product = selectProduct();
+    const brand = selectBrand();
+    const size = selectedSize;
     dispatch({
       type: "ADD_SIZE",
       payload: {
-        product: selectProduct(),
-        brand: selectBrand(),
-        size: selectedSize,
+        product,
+        brand,
+        size,
       },
     });
+    postSize(product, brand, size);
     resetSelected();
   };
 
@@ -51,7 +55,6 @@ const RegisterModal = (props) => {
     dispatch({
       type: "HIDE_MODAL",
     });
-    postSizesOnRegister();
   };
 
   const readyToAdd = selectedSize && product && brand;
