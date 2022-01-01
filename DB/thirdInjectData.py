@@ -38,8 +38,8 @@ def check_if_small_or_big_brand(size, brand):
     return size
 
 
-def get_random_weights(tend_to_but_bigger_size):
-    if tend_to_but_bigger_size:
+def get_random_weights(tend_to_buy_bigger_size):
+    if tend_to_buy_bigger_size:
         return (0, 80, 20)
     else:
         return (20, 80, 0)
@@ -91,14 +91,14 @@ jackets = ["reebok_jacket", "adidas_jacket", "mango_jacket", "puma_jacket", "onl
 
 sizes = ['XS', 'S', 'M', 'L', 'XL']
 
-first_names = ["Shachar", "Hadas", "Yuval", "Orit", "Hani", "Daniel", "Noa", "Rina", "Amira", "Maya", "Ruth", "Dina", # you can add names if you like
+first_names = ["Shachar", "Hadas", "Yuval", "Orit", "Hani", "Daniel", "Noa", "Rina", "Amira", "Maya", "Ruth", "Dina", # you can add names if you like (65)
                "Sharon", "Sara", "Nofar", "Tanya", "Anna", "Anat", "Yael", "Johanna", "Mary", "Jennifer", "Linda",
                "Roni", "Lihi", "Kim", "Shir", "Orna", "Rachel", "Dona", "Yasmin", "Michal", "Tamar", "Shani", "Galit",
                "Samira", "Qamar", "Nasrin", "Dana", "Avivit", "Noy", "Rotem", "Hadar", "Shaked", "Monica", "Sara",
                "Shaked", "Elizabeth", "Barbara", "Susan", "Nancy", "Lisa", "Betty", "Margaret", "Sandra", "Ashley"
                "carmella", "Dvora", "Gitit", "Nadin", "Taylor", "Jessica", "Emily", "Victoria", "Flor"]
 
-last_names = ["James", "Levi", "Cohen", "Robinson", "Jordan", "Golan", "Zait", "Mizrahi", "Yasin", "Brown", "Peretz", # you can add names if you like
+last_names = ["James", "Levi", "Cohen", "Robinson", "Jordan", "Golan", "Zait", "Mizrahi", "Yasin", "Brown", "Peretz", # you can add names if you like (57)
               "Israeli", "Smith", "Rubinshtein", "Silver", "Mazor", "Yamin", "Anderson", "Thomas", "Moore", "Jackson",
               "Barak", "Narkis", "Obama", "Hassan", "Diab", "Klein", "Sade", "Zisman", "Dor", "Chen", "Azaria", "Baron",
               "Clooney", "Bennet", "Johnson", "Williams", "Jones", "Garcia", "Miller", "Davis", "David", "Wilson",
