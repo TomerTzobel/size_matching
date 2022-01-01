@@ -11,7 +11,7 @@ const Filters = (props) => {
   return (
     <Container className="mt-3">
       <Row>
-        <Col>
+        <Col md={7} lg={7} sm={7} xl={7} xxl={7}>
           <Row>
             <Col>
               <Dropdown
@@ -30,7 +30,7 @@ const Filters = (props) => {
           </Row>
         </Col>
 
-        <Col></Col>
+        <Col md={5} lg={5} sm={5} xl={5} xxl={5}></Col>
       </Row>
     </Container>
   );
