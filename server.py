@@ -1,6 +1,6 @@
 import json
 import mysql.connector
-
+import sys
 from flask import Flask,request
 import pandas as pd
 import numpy as np
@@ -12,7 +12,8 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="aaat", #our last name first char's, change it if you need
+    passwd=sys.argv[1],
+    #passwd="aaat", #our last name first char's, change it if you need
     #passwd ="abc70807", # for tomer, need to stay in comment
     database="size_matching"
     )

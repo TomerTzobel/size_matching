@@ -1,5 +1,6 @@
 @ECHO OFF
-start python server.py
+set /P passwd="Please enter you mysql password: "
+start python server.py %passwd%
 cd client
 start npm start
 exit
