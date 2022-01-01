@@ -31,7 +31,7 @@ const FeedbackModal = (props) => {
           </Modal.Header>
           <Modal.Body>
           <Container><Row className="justify-content-md-center">{`You purchased ${name} by ${brand}.`}</Row></Container>
-          <Container><Row className="justify-content-md-center">Which size fit you the best?</Row></Container>
+          <Container><Row className="justify-content-md-center">Which size fit you best?</Row></Container>
           <Container><Row className="justify-content-md-center">
           <ButtonGroup className="me-2 p-3" aria-label="First group">
               {sizeButtons}
