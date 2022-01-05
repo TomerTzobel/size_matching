@@ -18,7 +18,7 @@ firstLoadDB.py
 secondLoadTable.py
 thirdInjectData.py
 
-build clilent-
+build clilent (only in the first run)-
 enter client folder and run: npm install
 
 run project-
