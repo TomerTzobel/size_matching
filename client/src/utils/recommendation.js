@@ -12,3 +12,19 @@ export const getRecommendation = async () => {
         store.dispatch({type: "SET_RECOMMENDATION", payload: -1})
     }
 };
+
+export const getRoundedSize = (size) => {
+    if (size < 12.5) {
+        return 'XS'
+    }
+    if (size < 37.5) {
+        return 'S'
+    }
+    if (size < 62.5) {
+        return 'M'
+    }
+    if (size < 85.5) {
+        return 'L'
+    }
+    return 'XL'
+}

@@ -1,6 +1,7 @@
 import React from "react";
 import { ProgressBar, Container, Row, Col } from "react-bootstrap";
 import { connect } from 'react-redux';
+import { getRoundedSize } from "../utils/recommendation";
 
 const RecommendedSize = (props) => {
   const { recommendedSize } = props;
@@ -16,7 +17,7 @@ const RecommendedSize = (props) => {
         fluid
         className="p-3 mt-3 mb-3 border border-secondary rounded bg-light"
       >
-        <h4> Based on your shopping history, the best fit for you is: </h4>
+        <h4> Based on your shopping history, the best fit for you is {getRoundedSize(recommendedSize)}. Our precise estimation: </h4>
         <Row className='mt-3 text-center'>
           <Col> XS </Col>
           <Col></Col>
