@@ -15,18 +15,18 @@ Easy run (for windows):
 - run
 
 Manual run:
-build data (only in the first run)-
+build data (only in the first run)
 enter DB folder and then run by this order:
-firstLoadDB.py 
-secondLoadTable.py
-thirdInjectData.py
+- firstLoadDB.py 
+- secondLoadTable.py
+- thirdInjectData.py
 
-build clilent (only in the first run)-
-enter client folder and run: npm install
+build clilent (only in the first run):
+- enter client folder and run: npm install
 
 run project-
-run server.py
-enter client folder and run: npm start
+- run server.py
+- enter client folder and run: npm start
 
 *please note that at each run of the server/build data, 
 the password for your mySql should be provided as an argument
