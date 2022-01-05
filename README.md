@@ -8,7 +8,7 @@ In order to run the project you need to download the following libraries for Pyt
 
 also you need to download:
 - Node.js
-- mySql
+- MySql
 
 Easy run (for windows):
 - build (only for the first run)
