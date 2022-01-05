@@ -3,11 +3,11 @@ Project, E-Commerce workshop
 
 In order to run the project you need to download the following libraries for Python:
 - mysql.connector, numpy, pandas
-- Flask,request (from flask)
+- Flask, request (from flask)
 - CORS, cross_origin (from flask_cors)
 
 also you need to download:
-- node.js
+- Node.js
 - mySql
 
 Easy run (for windows):
