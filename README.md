@@ -15,7 +15,9 @@ Easy run (for windows):
 - run
 
 Manual run:
-build data (only in the first run)
+
+build data (only in the first run):
+
 enter DB folder and then run by this order:
 - firstLoadDB.py 
 - secondLoadTable.py
