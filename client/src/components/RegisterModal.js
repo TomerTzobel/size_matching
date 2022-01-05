@@ -42,7 +42,7 @@ const RegisterModal = (props) => {
         size,
       },
     });
-    postSize(product, brand, size);
+    postSize(product, brand, size, newUsername);
     resetSelected();
   };
 
