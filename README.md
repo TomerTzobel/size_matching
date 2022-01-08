@@ -34,6 +34,7 @@ run project-
 the password for your mySql should be provided as an argument
 
 
+Note - after buying an item there's a 5s timeout. Please *wait for it* and don't buy another product before the feedback form appears (we assumed 'normal' behavior by users). 
 
 Adam Kroskin- 314050683
 Avi Kashani- 204159438
